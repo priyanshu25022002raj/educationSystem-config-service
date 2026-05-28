@@ -1,0 +1,57 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: board-service
+              uri: lb://BOARD-SERVICE
+              predicates:
+                - Path=/api/v1/india/board/**
+              filters:
+                - StripPrefix=2
+
+            - id: school-service
+              uri: lb://SCHOOL-SERVICE
+              predicates:
+                - Path=/api/v1/india/school/**
+              filters:
+                - StripPrefix=2
+
+server:
+  port: 8083
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+#spring:
+#  application:
+#    name: api-gateway
+#
+#  cloud:
+#    gateway:
+#      mvc:
+#        routes:
+#          - id: board-service
+#            uri: lb://BOARD-SERVICE
+#            predicates:
+#              - Path=/api/v1/india/board/**
+#            filters:
+#              - StripPrefix=2
+#
+#          - id: school-service
+#            uri: lb://SCHOOL-SERVICE
+#            predicates:
+#              - Path=/api/v1/india/school/**
+#            filters:
+#              - StripPrefix=2
+#
+#server:
+#  port: 8083
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
