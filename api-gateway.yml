@@ -24,6 +24,13 @@ spring:
                 - Path=/api/v1/students/**
               filters:
                 - StripPrefix=2
+                
+            - id: admissionFee
+              uri: lb://ADMISSIONFEE
+              predicates:
+                - Path=/api/v1/school/fee/**
+              filters:
+                - StripPrefix=2
 
 server:
   port: 8083
